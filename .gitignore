@@ -1,0 +1,6 @@
+
+# ignore vi swap files
+*.swp
+
+# ignore compilation artifacts
+*.pyo, *pyc, *.o
