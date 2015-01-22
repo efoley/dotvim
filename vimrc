@@ -7,15 +7,33 @@
 
 set nocompatible
 
-" Change leader from \ to ,
-" let mapleader=","
+filetype off " required while we add vundle bundles
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
 
-" Load pathogen to start
-" filetype off " thought this was necessary...doesn't seem to be the case
-call pathogen#infect()
-" call pathogen#helptags() " only needs to be done after new bundles installed
+" add bundles here!
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'kien/ctrlp.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'lukerandall/haskellmode-vim'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'eagletmt/neco-ghc'
+
+Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-leiningen'
 
 filetype plugin indent on
+
+" setup haskellmode-vim
+let g:haddock_browser='chrome'
+au BufEnter *.hs compiler ghc
+
+" Change leader from \ to ,
+" let mapleader=","
 
 " general
 set hidden                " hide buffers instead of closing them
@@ -28,6 +46,9 @@ set nowrap                      " don't wrap lines
 set backspace=indent,eol,start  " allow backspace over everything
 set pastetoggle=<F2>            " paste mode turns off smart indent, etc.
 
+set background=dark
+syntax enable             " use syntax highlighting
+syntax on
 " a trick for sudo when you write a file
 " just do 'w!!' to write via sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -71,15 +92,20 @@ set noswapfile
 " filetype specific settings
 " autocmd filetype python set expandtab " sets expandtab only for python files
 
-" use the mustang colorscheme
+" TODO EDF still need this stuff??
+" set the colorscheme
 if $COLORTERM == 'gnome-terminal'
   " for some reason vim doesn't properly discover that the gnome-terminal
   " supports 256 colors
   set t_Co=256
 endif
-colorscheme mustang
+
+"let g:solarized_termcolors = 256
+"colorscheme solarized
+
 if &t_Co >= 256 || has("gui_running")
   colorscheme mustang
+  "colorscheme darkblue
 endif
 
 if &t_Co > 2 || has("gui_running")
@@ -108,4 +134,7 @@ fun! s:ToggleMouse()
 endfunction
 noremap <F12> :call <SID>ToggleMouse()<CR>
 
-
+" This should allow Esc to close the command-t search window
+if &term =~ "xterm" || &term =~ "screen"
+  let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+endif

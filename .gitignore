@@ -4,3 +4,6 @@
 
 # ignore compilation artifacts
 *.pyo, *pyc, *.o
+
+# ignore all VIM bundles since these are managed by Vundle
+bundle/**
