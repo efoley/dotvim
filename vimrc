@@ -8,24 +8,25 @@
 set nocompatible
 
 filetype off " required while we add vundle bundles
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " add bundles here!
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Shougo/neocomplcache.vim'
-Bundle 'lukerandall/haskellmode-vim'
-Bundle 'eagletmt/ghcmod-vim'
-Bundle 'eagletmt/neco-ghc'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Shougo/neocomplcache.vim'
+Plugin 'lukerandall/haskellmode-vim'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/neco-ghc'
 
-Bundle 'guns/vim-clojure-static'
-Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-leiningen'
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-leiningen'
 
+call vundle#end()
 filetype plugin indent on
 
 " setup haskellmode-vim
