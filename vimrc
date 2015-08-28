@@ -7,24 +7,35 @@
 
 set nocompatible
 
+set laststatus=2 " so status line shows up
+
 filetype off " required while we add vundle bundles
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " add bundles here!
 Plugin 'gmarik/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Shougo/neocomplcache.vim'
+
+"Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Rip-Rip/clang_complete'
+
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-leiningen'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+
+" Plugin 'cespare/vim-toml'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,7 +45,24 @@ let g:haddock_browser='chrome'
 au BufEnter *.hs compiler ghc
 
 " Change leader from \ to ,
-" let mapleader=","
+let mapleader=","
+
+" Exit insert mode using jk
+inoremap jk <esc>
+
+" make an alias for Ctrlp tag command to quickly jump to tags
+nnoremap <leader>. :CtrlPTag<cr>
+
+" nicer to navigate between windows using Ctrl + vim direction keys
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" shortcut to edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" and to source vimrc
+nnoremap <leader>sv :vsplit $MYVIMRC<cr>
 
 " general
 set hidden                " hide buffers instead of closing them
@@ -103,6 +131,7 @@ endif
 
 "let g:solarized_termcolors = 256
 "colorscheme solarized
+colorscheme darkblue
 
 if &t_Co >= 256 || has("gui_running")
   colorscheme mustang
@@ -139,3 +168,18 @@ noremap <F12> :call <SID>ToggleMouse()<CR>
 if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTCancelMap = ['<ESC>', '<C-c>']
 endif
+
+" *** YouCompleteMe ***
+" Close YouCompleteMe preview window after auto-complete done
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_confirm_extra_conf = 0
+
+" *** airline ***
+" Note that I used ryanoasis/nerd-fonts to install the powerline fonts
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
